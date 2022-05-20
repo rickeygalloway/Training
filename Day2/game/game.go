@@ -29,6 +29,21 @@ func main() {
 	p3.Move(0, 0)
 	fmt.Printf("p3 (move): %#v\n", p3)
 
+	pl1 := Player{"Rickey", Point{10, 10}}
+	fmt.Printf("pl1: %#v\n", pl1)
+	fmt.Printf("pl1.X: %#v\n", pl1.Point.X)
+	pl1.Move(0, 0)
+	fmt.Printf("pl1.X (moved): %#v\n", pl1.Point.X)
+
+	ms := []Mover{
+		&p1,
+		&pl1,
+		p3,
+	}
+	moveAll(ms, 0, 0)
+	for _, m := range ms {
+		fmt.Printf("%#v\n", m)
+	}
 }
 
 // most of the time, use pointer receiver
@@ -50,7 +65,39 @@ const (
 	maxY = 600
 )
 
+type Player struct {
+	Name string
+	//X float64 //This will shadow Point.X
+	Point //Player is embedding Point
+}
 type Point struct {
 	X int
 	Y int
 }
+
+func moveAll(ms []Mover, x, y int) {
+	for _, m := range ms {
+		m.Move(x, y)
+	}
+}
+
+type Mover interface {
+	Move(int, int)
+}
+
+// Rule of thumb: Return types, accept interfaces
+//functions vs methods
+
+//Whats the minimum interface required for sorting something
+/*
+
+type Sortable interface{
+	Len() int				// need to know the length
+	Less(i,j int) bool		//
+	Swap(i,j int) bool
+}
+The interface here matches
+https://pkg.go.dev/sort#Interface
+
+
+*/
