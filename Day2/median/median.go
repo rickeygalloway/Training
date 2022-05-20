@@ -46,6 +46,32 @@ func main() {
 	values = append(values, 4)
 	fmt.Println(median(values)) // 2.5
 	fmt.Println(values)
+
+	var vs []int
+	for i := 0; i < 10; i++ {
+		vs = appendInt(vs, i)
+	}
+	fmt.Println(vs)
+}
+
+//mimic built in append
+func appendInt(values []int, n int) []int {
+	i := len(values)
+	if len(values) < cap(values) {
+		fmt.Println("Has Space")
+		values = values[:len(values)+1]
+	} else {
+		fmt.Println("No Space - reallocate")
+		vs := make([]int, 2*len(values)+1)
+		copy(vs, values)
+		values = vs[:len(values)+1]
+
+		//NOTATION
+		//vs[1:]  array starts at 1 until the end
+		//vs[:6]  array starts at 0 and goes to 6
+	}
+	values[i] = n
+	return values
 }
 
 func median(values []float64) (float64, error) {
