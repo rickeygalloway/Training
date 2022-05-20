@@ -29,7 +29,10 @@ func main() {
 	p3.Move(0, 0)
 	fmt.Printf("p3 (move): %#v\n", p3)
 
-	pl1 := Player{"Rickey", Point{10, 10}}
+	pl1 := Player{
+		Name:  "Rickey",
+		Point: Point{10, 10},
+	}
 	fmt.Printf("pl1: %#v\n", pl1)
 	fmt.Printf("pl1.X: %#v\n", pl1.Point.X)
 	pl1.Move(0, 0)
@@ -44,6 +47,23 @@ func main() {
 	for _, m := range ms {
 		fmt.Printf("%#v\n", m)
 	}
+
+	k := Copper
+	fmt.Println("k:", k)
+}
+
+//implement fmt.Stringer inferface
+func (k Key) String() string {
+	switch k {
+	case Copper:
+		return "Copper"
+	case Crystal:
+		return "Chrystal"
+	case Jade:
+		return "Jade"
+	}
+	// Warning: Don't use %s or %v here (∞ recursion)
+	return fmt.Sprintf("<key %d>", k)
 }
 
 // most of the time, use pointer receiver
@@ -67,6 +87,7 @@ const (
 
 type Player struct {
 	Name string
+	Keys []Key
 	//X float64 //This will shadow Point.X
 	Point //Player is embedding Point
 }
@@ -84,6 +105,15 @@ func moveAll(ms []Mover, x, y int) {
 type Mover interface {
 	Move(int, int)
 }
+
+// iota is automatically incremented by 1 in every const group
+const (
+	Crystal Key = iota + 1 // 1 << iota (bitmask)
+	Copper
+	Jade
+)
+
+type Key uint8
 
 // Rule of thumb: Return types, accept interfaces
 //functions vs methods
