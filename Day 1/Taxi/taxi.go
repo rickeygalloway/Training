@@ -4,6 +4,9 @@ The NYC Taxi data has URLs in the following format:
 https://s3.amazonaws.com/nyc-tlc/trip+data/yellow_tripdata_2019-01.csv
 https://s3.amazonaws.com/nyc-tlc/trip+data/green_tripdata_2019-02.csv
 Using several HTTP HEAD requests, determine the size in megabytes of all the CSV files (both yellow and green) in 2019.
+
+Didn't do entire assignment...
+
 */
 
 package main
