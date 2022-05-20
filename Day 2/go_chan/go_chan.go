@@ -41,6 +41,24 @@ func main() {
 	values := []int{7, 2, 1, 8}
 	fmt.Println(sleepSort(values))
 
+	go func() {
+		for i := 0; i < 4; i++ {
+			msg := fmt.Sprintf("message #%d", i)
+			ch <- msg
+		}
+		close(ch) //fatal error without closing channel
+	}()
+
+	for msg := range ch {
+		fmt.Println(msg)
+	}
+
+	val = <-ch
+	fmt.Printf("got : %#v", val)
+
+	// ch <- "hi to closed channel" 	//panic
+	//close(ch) //panic when you close a closed channel
+
 }
 
 //sleep sort
@@ -78,6 +96,6 @@ func sleepSort(values []int) []int {
 
 /*
 
-Fun fact about me (and my family) is that in 2019, my wife, daughter, our maltipoo Caesar, and I moved to Cambodia for a year.
 
-*/
+
+ */
