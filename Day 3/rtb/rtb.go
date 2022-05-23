@@ -25,17 +25,30 @@ func main() {
 // If algo didn't finish in time, return a default bid
 func bidOn(ctx context.Context, url string) Bid {
 	ch := make(chan Bid, 1) // Use buffered channel to avoid goroutine leak
+
+	fmt.Println("len(ch):", len(ch))
+	fmt.Println("cap(ch):", cap(ch))
+
+	var ch3 chan int
+	fmt.Println("ch3: ", cap(ch3))
+	fmt.Println("ch3: ", cap(ch3))
+
+	//send to nil channel
+	//ch3 <- 7 //fatal error: all goroutines are asleep - deadlock!
+
+	//channels are either unbuffered or a size of 1
 	go func() {
 		ch <- bestBid(url)
 	}()
 
-	//change sleep value d on line 46 to get different return values
+	//change sleep value d on line 62 (d := 500 * time.Millisecond) to get different return values
 	select {
 	case bid := <-ch:
 		return bid
 	case <-ctx.Done():
 		return defaultBid //if bestBid times out, this will be returned value
 	}
+
 }
 
 var defaultBid = Bid{
