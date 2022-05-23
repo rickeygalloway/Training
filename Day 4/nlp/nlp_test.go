@@ -1,6 +1,8 @@
 package nlp //<- same package, so now we have access to internal functions
 import (
 	"github.com/stretchr/testify/require"
+	"gopkg.in/yaml.v3"
+	"os"
 	"testing"
 )
 
@@ -19,6 +21,32 @@ func TestTokenize(t *testing.T) {
 
 }
 
+type testCase struct {
+	Text   string
+	Tokens []string
+}
+
+func TestTokenizeManyFromCasesFile(t *testing.T) {
+	for _, tc := range loadTokenizeCases(t) {
+		t.Run(tc.Text, func(t *testing.T) {
+			tokens := Tokenize(tc.Text)
+			require.Equal(t, tokens, tokens)
+		})
+	}
+}
+func loadTokenizeCases(t *testing.T) []testCase {
+	file, err := os.Open("testdata/tokenize_cases.yaml")
+	require.NoError(t, err)
+
+	defer file.Close()
+
+	var cases []testCase
+	err = yaml.NewDecoder(file).Decode(&cases)
+	require.NoError(t, err)
+	return cases
+}
+
+//TestTokenizeMany with slice
 //anonymous struct
 var tokenizeCases = []struct {
 	text   string

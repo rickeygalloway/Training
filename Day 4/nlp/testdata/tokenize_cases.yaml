@@ -1,0 +1,21 @@
+- text: Who's on first?
+  tokens:
+    - who
+    - on
+    - first
+- text: What's on second?
+  tokens:
+    - what
+    - on
+    - second
+- text: ""
+  tokens: null
+- text: a b c d e f g
+  tokens:
+    - a
+    - b
+    - c
+    - d
+    - e
+    - f
+    - g
