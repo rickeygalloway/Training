@@ -9,6 +9,10 @@ import (
 )
 
 func main() {
+
+	//when you make a network request/http request, you should use context
+	//see github.go project from day 1: line 34
+
 	// We have 50 msec to return an answer
 	// http://shipt.com, https://shipt.com
 	url := "http://shipt.com"
@@ -32,7 +36,6 @@ func bidOn(ctx context.Context, url string) Bid {
 	case <-ctx.Done():
 		return defaultBid //if bestBid times out, this will be returned value
 	}
-
 }
 
 var defaultBid = Bid{

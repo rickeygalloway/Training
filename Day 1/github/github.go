@@ -31,8 +31,9 @@ func main() {
 func githubInfo(login string) (string, int, error) {
 
 	u := fmt.Sprintf("https://api.github.com/users/%s", url.PathEscape(login))
-	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second) //altering timeout gives different results
 	defer cancel()
+
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, u, nil)
 	if err != nil {
 		return "", 0, err
