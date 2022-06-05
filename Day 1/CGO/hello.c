@@ -2,11 +2,10 @@
 #include <stdio.h>
 
 void Hello(){
-    printf("Hello world");
+    printf("Hello world from Hello");
 }
 
 int main(){
-    printf("Hello");
+    printf("Hello world from main");
     return 0;
-
 }

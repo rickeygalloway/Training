@@ -1,8 +1,9 @@
+//go:build !windows
+// +build !windows
+
 package main
 
-/*
-  #include "hello.h"
-*/
+// #include "hello.h"
 import "C"
 import (
 	"fmt"

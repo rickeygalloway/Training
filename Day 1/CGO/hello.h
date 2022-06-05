@@ -2,5 +2,6 @@
 #define _HELLO_H
 
 void Hello();
+int main();
 
 #endif
