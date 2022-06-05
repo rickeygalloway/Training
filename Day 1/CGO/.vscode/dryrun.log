@@ -1,0 +1,5 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/rickey.galloway/Documents/GolandProjects/Training/Day 1/CGO'
+gcc hello.c -target x86_64-apple-darwin
+make: Leaving directory `/Users/rickey.galloway/Documents/GolandProjects/Training/Day 1/CGO'
+ 

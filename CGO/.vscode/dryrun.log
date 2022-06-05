@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/rickey.galloway/Documents/GolandProjects/Training/CGO'
+make: Leaving directory `/Users/rickey.galloway/Documents/GolandProjects/Training/CGO'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+
